@@ -53,6 +53,7 @@ namespace Biblioteca2.Controllers
             }
 
             var autor = await _context.Autors
+                .Include(a => a.LivroAutors).ThenInclude(la => la.Livro)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (autor == null)
             {

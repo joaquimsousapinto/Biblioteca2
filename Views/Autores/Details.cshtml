@@ -1,42 +1,48 @@
 ﻿@model Biblioteca2.Models.Autor
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Autor - Detalhes";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>Autor</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Bibliografia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Bibliografia)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataMorte)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataMorte)
-        </dd>
-    </dl>
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<dl>
+    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+    <dd>@Html.DisplayFor(model => model.Nome)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Bibliografia)</dt>
+    <dd>@Html.DisplayFor(model => model.Bibliografia)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DataNascimento)</dt>
+    <dd>@Html.DisplayFor(model => model.DataNascimento)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DataMorte)</dt>
+    <dd>@Html.DisplayFor(model => model.DataMorte)</dd>
+</dl>
+<p>
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-primary btn-sm" title="Editar"><i class="fa fa-pencil"></i> <small>Editar</small></a>
+    <a href="@Url.Action("Index")" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <small>Voltar à Lista</small></a>
+</p>
+@if (Model.LivroAutors.Count > 0)
+{
+    <div class="border-bottom mt-4 mb-2">
+        <h4><i class=" fa fa-book text-danger"></i> Lista de livros deste Autor (@Model.LivroAutors.Count)</h4>
+    </div>
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.LivroAutors.FirstOrDefault().Livro.Titulo)</th>
+                <th></th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.LivroAutors)
+        {
+            <tr>
+                <td>@item.Livro.Titulo</td>
+                <td class="text-end">
+                    <a href="@Url.Action("Details", "Livros", new { id = item.Livro.Id })" class="btn btn-default btn-xs"><i class="fa fa-eye"></i></a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h6><i class="fa fa-info-circle text-info"></i> Não há livros deste autor.</h6>
+}
