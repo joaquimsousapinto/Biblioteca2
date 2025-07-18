@@ -1,0 +1,86 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "Biblioteca2Context",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "MinimumProductVersion": "2.6.0",
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Biblioteca2",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[Autor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Categoria]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Editora]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Emprestimo]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EmprestimoEstado]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EmprestimoLivro]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Livro]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LivroAutor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[LivroCategoria]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Utilizador]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false,
+   "UseT4Split": false
+}

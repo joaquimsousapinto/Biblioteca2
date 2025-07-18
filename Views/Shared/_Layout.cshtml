@@ -1,49 +1,102 @@
-﻿<!DOCTYPE html>
+﻿@using Biblioteca2.Models.Common
+@inject BuildInfo BuildInfo
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Biblioteca2</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap">
+    <environment include="Development">
+        <!-- Local files for Development -->
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/dist/css/all.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/dist/css/v4-shims.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <!-- Remote CDN files for Production -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/v4-shims.min.css" />
+    </environment>
+    <link rel="stylesheet" href="~/lib/bootstrap-print-css/css/bootstrap-print.css" media="print">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Biblioteca2.styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Biblioteca2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+    <nav class="navbar fixed-top navbar-expand bg-body-tertiary border-bottom mb-3">
+        <div class="container-xxl container-fluid">
+            <a class="navbar-brand m-0 p-0" asp-action="Index" asp-controller="Home" title="Biblioteca aspnet Core"><i class="fa fa-pagelines text-success"></i></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-bars text-primary"></i> <span class="d-none d-xl-inline">Tabelas Principais</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Emprestimos">Empréstimos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Livros">Livros</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Autores">Autores</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Utilizadores">Utilizadores</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-cog text-success"></i> <span class="d-none d-xl-inline">Tabelas Autiliares</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Categorias" >Categorias</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Estados" >Estados dos livros</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Editoras">Editoras</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-file-pdf-o text-danger"></i> <span class="d-none d-xl-inline">Relatórios</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Utilizadores por sexo e faixa etária</a></li>
+                            <li><a class="dropdown-item" href="#">Livros por categoria</a></li>
+                            <li><a class="dropdown-item" href="#">Estados dos empréstimos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item d-none d-xl-inline">@Html.ActionLink("Sobre", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item d-none d-xl-inline">@Html.ActionLink("Contato", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+                <partial name="_LoginPartial" />
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Biblioteca2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <nav class="navbar fixed-bottom bg-body-tertiary border-top" role="navigation">
+        <div class="container-xxl container-fluid">
+            <div class="navbar-text small">@DateTime.Now.Year - Biblioteca aspnet Core | Versão: @BuildInfo.BuildDate.ToString("yyMMdd-HHmmss")</div>
+            <div class="navbar-right navbar-text small hidden-sm"><a href="http://www.ua.pt" class="nav-link" target="_blank" title="Universidade de Aveiro">Universidade de Aveiro</a></div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </nav>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/font-awesome/dist/js/all.min.js"></script>
+        <script src="~/lib/font-awesome/dist/js/v4-shims.min.js"></script>
+        <script src="~/lib/magnify/dist/js/jquery.magnify.min.js"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert2.all.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <!-- Remote CDN scripts for Production -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/v4-shims.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnify/2.3.3/js/jquery.magnify.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10"></script>
+    </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
