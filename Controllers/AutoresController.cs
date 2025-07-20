@@ -80,8 +80,10 @@ namespace Biblioteca2.Controllers
             {
                 _context.Add(autor);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Registo criado com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["Fail"] = "Erro na criação do Registo.";
             return View(autor);
         }
 
@@ -115,24 +117,12 @@ namespace Biblioteca2.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(autor);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AutorExists(autor.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(autor);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Registo editado com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["Fail"] = "Erro na edição do Registo.";
             return View(autor);
         }
 
@@ -163,15 +153,11 @@ namespace Biblioteca2.Controllers
             if (autor != null)
             {
                 _context.Autors.Remove(autor);
+                TempData["Success"] = "Registo apagado com sucesso.";
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
+            TempData["Fail"] = "Erro a apagar o Registo.";
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AutorExists(int id)
-        {
-            return _context.Autors.Any(e => e.Id == id);
         }
     }
 }

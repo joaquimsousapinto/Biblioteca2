@@ -5,9 +5,6 @@
 /*@media (min-width: 1200px) { body { font-size: 0.85em; } }*/
 @media (min-width: 1400px) { body { font-size: 0.85em; } }
 
-[data-bs-theme="light"] .table thead th { background-color: var(--bs-gray-400) !important; color: var(--bs-gray-000) !important; }
-[data-bs-theme="dark"] .table thead th { background-color: var(--bs-gray-600) !important; color: var(--bs-gray-000) !important; }
-
 dt { font-weight: 300; font-size: 0.75rem; }
 .dropdown-item.active svg { color: var(--bs-body-bg)!important; }
 .row .form-floating label { margin-left: calc(var(--bs-gutter-x) * .25); }
@@ -16,48 +13,16 @@ select, input, textarea, .dropdown-item { font-size: 0.9rem !important; }
 a, a:hover, a:active, a:visited { text-decoration: none !important; }
     a.dropdown-item { font-size: 0.9rem; }
 
-div:has( > img[id^="Signature_"]) { height: 180px; }
-img[id^="Signature_"] { max-height: 160px; }
-
-.input-group-text { font-size: 85%; }
-.nav-tabs a:not(.active) { background-color: var(--bs-tertiary-bg) !important; cursor: pointer; }
-.nav-tabs a.nav-item { border: solid 1px rgb(var(--bs-secondary-bg-rgb)); min-width: 120px; }
 span.field-validation-error::before { content: "→ "; }
 span.field-validation-error { font-size: 0.8rem; }
-::placeholder { color: #aaa !important; }
-.page-link.small { font-size: 0.75rem; }
-.textarea, textarea.form-control { min-height: 120px!important; }
-.x-small { font-size: 0.75rem; }
-.tab-content { min-height: 240px; }
-.rotated-text { writing-mode: sideways-lr; padding-top: 10px; }
-
-@media (min-width: 768px) {
-    .tab-content { min-height: 360px; }
-}.ui-autocomplete { cursor: pointer; font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif !important; line-height: 0.9rem; font-size: 0.75rem !important; height: 120px; overflow-y: auto; overflow-x: hidden; }
-mark { padding: 0; }
-#btn-back-to-top { position: fixed; bottom: 74px; border-radius: 50%; right: 20px; display: none; z-index: 2; }
-
-/* button-xs
----------------------------- */
-.btn-xs { padding: 1px 5px; font-size: 12px; min-width: 25px!important; line-height: 1.5; border-radius: 3px; }
-
-/* Side notes for calling out things
--------------------------------------------------- */
-/* Base styles (regardless of theme) */
-.bs-callout { margin: 20px 0; padding: 15px 30px 15px 15px; border-left: 5px solid var(--bs-tertiary-color); background-color: var(--bs-table-bg); }
-    .bs-callout h4 { margin-top: 0; }
-    .bs-callout p:last-child { margin-bottom: 0; }
-    .bs-callout code, .bs-callout .highlight { background-color: var(--bs-tertiary-bg); }
-
-/* Themes for different contexts */
-.bs-callout-success { background-color: var(--bs-success-bg-subtle); border-color: var(--bs-success); }
-.bs-callout-danger { background-color: var(--bs-danger-bg-subtle); border-color: var(--bs-danger); }
-.bs-callout-warning { background-color: var(--bs-warning-bg-subtle); border-color: var(--bs-warning); }
-.bs-callout-info { background-color: var(--bs-info-bg-subtle); border-color: var(--bs-info); }
+textarea.form-control {  min-height: calc(1.5em * 4 + (0.75rem * 2))!important; }
+textarea.form-control[rows] { min-height: calc(1.5em * attr(rows) + (0.75rem * 2)); }
 
 /* button default
 ---------------------------- */
-.btn-default { color: var(--bs-secondary); background-color: var(--bs-secondary-bg); border-color: var(--bs-secondary-border-subtle); background-repeat: repeat-x; }
-    .btn-default:focus { color: var(--bs-secondary); background-color: var(--bs-secondary-bg); border-color: var(--bs-secondary-border); }
-    .btn-default:active, .btn-default:hover { color: var(--bs-secondary-text-emphasis); background-color: var(--bs-secondary-bg-subtle); border-color: var(--bs-border-color); }
-
+.btn-default { color: #333; background-color: #f8f9fa; border-color: #ccc; background-image: linear-gradient(to bottom,#fff 0,#e0e0e0 100%); background-repeat: repeat-x; }
+    .btn-default:focus { color: #333; background-color: #e6e6e6; border-color: #8c8c8c; }
+    .btn-default:active, .btn-default:hover { color: #333; background-color: #e6e6e6; border-color: #adadad; }
+/* button-xs
+---------------------------- */
+.btn-xs { padding: 1px 5px; font-size: 12px; line-height: 1.5; border-radius: 3px; min-width: 24px; }

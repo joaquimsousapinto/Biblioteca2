@@ -16,7 +16,9 @@ namespace Biblioteca2.Controllers
         // GET: Estados
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EmprestimoEstados.OrderBy(x => x.Nome).ToListAsync());
+            return View(await _context.EmprestimoEstados
+                .Include(x => x.Emprestimos)
+                .OrderBy(x => x.Nome).ToListAsync());
         }
 
         // GET: Estados/Details/5
@@ -54,8 +56,10 @@ namespace Biblioteca2.Controllers
             {
                 _context.Add(emprestimoEstado);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Registo criado com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["Fail"] = "Erro na criação do Registo.";
             return View(emprestimoEstado);
         }
 
@@ -89,24 +93,12 @@ namespace Biblioteca2.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(emprestimoEstado);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmprestimoEstadoExists(emprestimoEstado.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(emprestimoEstado);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Registo editado com sucesso.";
                 return RedirectToAction(nameof(Index));
             }
+            TempData["Fail"] = "Erro na edição do Registo.";
             return View(emprestimoEstado);
         }
 
@@ -137,9 +129,11 @@ namespace Biblioteca2.Controllers
             if (emprestimoEstado != null)
             {
                 _context.EmprestimoEstados.Remove(emprestimoEstado);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Registo apagado com sucesso.";
+                return RedirectToAction(nameof(Index));
             }
-
-            await _context.SaveChangesAsync();
+            TempData["Fail"] = "Erro a apagar o Registo.";
             return RedirectToAction(nameof(Index));
         }
 
