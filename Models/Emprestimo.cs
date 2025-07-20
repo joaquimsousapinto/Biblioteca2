@@ -11,15 +11,17 @@ public partial class Emprestimo
 
     public int UtilizadorId { get; set; }
 
+    public int EstadoId { get; set; }
+
     public DateOnly DataEmprestimo { get; set; }
 
     public DateOnly? DataDevolucaoPrevista { get; set; }
 
     public DateOnly? DataDevolucaoReal { get; set; }
 
-    public int EstadoId { get; set; }
-
     public virtual ICollection<EmprestimoLivro> EmprestimoLivros { get; set; } = new List<EmprestimoLivro>();
 
     public virtual EmprestimoEstado Estado { get; set; }
+
+    public virtual Utilizador Utilizador { get; set; }
 }

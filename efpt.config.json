@@ -54,6 +54,10 @@
       {
          "Name": "[dbo].[Utilizador]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[SP_Utilizadores_Sexo_FaixaEtaria]",
+         "ObjectType": 1
       }
    ],
    "UiHint": null,

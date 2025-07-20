@@ -8,17 +8,18 @@
 }
 <div class="border-bottom pt-4 pb-2 mb-3">
     <div class="row">
-        <div class=" col-md-7">
+        <div class=" col-md-6">
             <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
         </div>
-        <div class=" col-md-5">
-            <form method="get" asp-action="Index">
+        <div class="col-md-6">
+            <form method="get" asp-action="Index" novalidate="novalidate">
                 <input type="hidden" name="page" value="1" />
                 <div class="row">
                     <div class="col-10">
                         <div class="form-floating">
-                            <input id="q" class="form-control form-control-sm" type="text" name="q" value="@q" />
+                            <input id="q" class="form-control form-control-sm" type="text" name="q" value="@q" data-val="true" data-val-required="Campo de preenchimento obrigatório." />
                             <label for="q">Insira o nome (ou parte do nome) ao autor</label>
+                            <span data-valmsg-for="q" data-valmsg-replace="true" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-2 text-end">
@@ -51,18 +52,10 @@
         <thead>
 
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().Bibliografia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().DataNascimento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.First().DataMorte)
-                </th>
+                <th>@Html.DisplayNameFor(model => model.First().Nome)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Bibliografia)</th>
+                <th>@Html.DisplayNameFor(model => model.First().DataNascimento)</th>
+                <th>@Html.DisplayNameFor(model => model.First().DataMorte)</th>
                 <th></th>
             </tr>
         </thead>
@@ -70,18 +63,10 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nome)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Bibliografia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataNascimento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataMorte)
-                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Bibliografia)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataNascimento)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataMorte)</td>
                     <td class="text-end">
                         <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-default btn-xs" title="Editar"><i class="fa fa-edit"></i></a>
                         <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-default btn-xs" title="Ver detalhes"><i class="fa fa-eye"></i></a>
@@ -109,6 +94,9 @@ else
 <p class="small" title="Tempo de criação da página"><i class="fa fa-clock-o"></i> @ViewBag.ElapsedMilliseconds.ToString("N0") ms</p>
 <partial name="_ToastStatus" />
 @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         $('document').ready(function () {
             $(".toast").toast('show');

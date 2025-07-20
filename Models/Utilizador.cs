@@ -20,4 +20,6 @@ public partial class Utilizador
     public DateOnly? DataNascimento { get; set; }
 
     public string Sexo { get; set; }
+
+    public virtual ICollection<Emprestimo> Emprestimos { get; set; } = new List<Emprestimo>();
 }

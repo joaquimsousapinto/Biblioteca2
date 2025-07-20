@@ -37,9 +37,13 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Autor>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Autor__3214EC07407B1DA1");
+            entity.HasKey(e => e.Id).HasName("PK__Autor__3214EC0754047B33");
 
             entity.ToTable("Autor");
+
+            entity.HasIndex(e => e.DataNascimento, "IX_Autor_DataNascimento");
+
+            entity.HasIndex(e => e.Nome, "IX_Autor_Nome");
 
             entity.Property(e => e.Bibliografia)
                 .HasMaxLength(1024)
@@ -52,7 +56,7 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Categorium>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Categori__3214EC07786F8E71");
+            entity.HasKey(e => e.Id).HasName("PK__Categori__3214EC07A733A844");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Descricao)
@@ -66,7 +70,7 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Editora>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Editora__3214EC07393CC967");
+            entity.HasKey(e => e.Id).HasName("PK__Editora__3214EC0741AB8566");
 
             entity.ToTable("Editora");
 
@@ -82,19 +86,32 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Emprestimo>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Empresti__3214EC07163A69AA");
+            entity.HasKey(e => e.Id).HasName("PK__Empresti__3214EC073B7A93E9");
 
             entity.ToTable("Emprestimo");
+
+            entity.HasIndex(e => e.DataDevolucaoPrevista, "IX_Emprestimo_DataDevolucaoPrevista");
+
+            entity.HasIndex(e => e.DataEmprestimo, "IX_Emprestimo_DataEmprestimo");
+
+            entity.HasIndex(e => e.EstadoId, "IX_Emprestimo_EstadoId");
+
+            entity.HasIndex(e => e.UtilizadorId, "IX_Emprestimo_UtilizadorId");
 
             entity.HasOne(d => d.Estado).WithMany(p => p.Emprestimos)
                 .HasForeignKey(d => d.EstadoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EmprestimoEstado");
+                .HasConstraintName("FK_Emprestimo_EmprestimoEstado");
+
+            entity.HasOne(d => d.Utilizador).WithMany(p => p.Emprestimos)
+                .HasForeignKey(d => d.UtilizadorId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Emprestimo_Utilizador");
         });
 
         modelBuilder.Entity<EmprestimoEstado>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Empresti__3214EC07E1D1716C");
+            entity.HasKey(e => e.Id).HasName("PK__Empresti__3214EC07F54B4E87");
 
             entity.ToTable("EmprestimoEstado");
 
@@ -110,6 +127,8 @@ public partial class Biblioteca2Context : DbContext
 
             entity.ToTable("EmprestimoLivro");
 
+            entity.HasIndex(e => e.LivroId, "IX_EmprestimoLivro_LivroId");
+
             entity.HasOne(d => d.Emprestimo).WithMany(p => p.EmprestimoLivros)
                 .HasForeignKey(d => d.EmprestimoId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
@@ -123,9 +142,15 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Livro>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Livro__3214EC077A2A8913");
+            entity.HasKey(e => e.Id).HasName("PK__Livro__3214EC079868E492");
 
             entity.ToTable("Livro");
+
+            entity.HasIndex(e => e.AnoPublicacao, "IX_Livro_AnoPublicacao");
+
+            entity.HasIndex(e => e.EditoraId, "IX_Livro_EditoraId");
+
+            entity.HasIndex(e => e.Titulo, "IX_Livro_Titulo");
 
             entity.Property(e => e.Titulo)
                 .HasMaxLength(256)
@@ -151,6 +176,7 @@ public partial class Biblioteca2Context : DbContext
                     {
                         j.HasKey("LivroId", "CategoriaId");
                         j.ToTable("LivroCategoria");
+                        j.HasIndex(new[] { "CategoriaId" }, "IX_LivroCategoria_CategoriaId");
                     });
         });
 
@@ -159,6 +185,8 @@ public partial class Biblioteca2Context : DbContext
             entity.HasKey(e => new { e.LivroId, e.AutorId });
 
             entity.ToTable("LivroAutor");
+
+            entity.HasIndex(e => e.AutorId, "IX_LivroAutor_AutorId");
 
             entity.HasOne(d => d.Autor).WithMany(p => p.LivroAutors)
                 .HasForeignKey(d => d.AutorId)
@@ -173,9 +201,13 @@ public partial class Biblioteca2Context : DbContext
 
         modelBuilder.Entity<Utilizador>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Utilizad__3214EC07F099BE28");
+            entity.HasKey(e => e.Id).HasName("PK__Utilizad__3214EC07E1C94643");
 
             entity.ToTable("Utilizador");
+
+            entity.HasIndex(e => e.Email, "IX_Utilizador_Email");
+
+            entity.HasIndex(e => e.Nome, "IX_Utilizador_Nome");
 
             entity.Property(e => e.Email)
                 .HasMaxLength(128)
