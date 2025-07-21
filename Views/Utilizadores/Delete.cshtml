@@ -1,0 +1,28 @@
+﻿@model Biblioteca2.Models.Utilizador
+@{
+    ViewData["Title"] = "Utilizador - Apagar";
+}
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
+</div>
+<dl>
+    <dt>@Html.DisplayNameFor(model => model.Nome)</dt>
+    <dd>@Html.DisplayFor(model => model.Nome) </dd>
+    <dt>@Html.DisplayNameFor(model => model.Morada)</dt>
+    <dd>@Html.DisplayFor(model => model.Morada) </dd>
+    <dt>@Html.DisplayNameFor(model => model.Telefone)</dt>
+    <dd>@Html.DisplayFor(model => model.Telefone) </dd>
+    <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+    <dd>@Html.DisplayFor(model => model.Email) </dd>
+    <dt>@Html.DisplayNameFor(model => model.DataNascimento)</dt>
+    <dd>@Html.DisplayFor(model => model.DataNascimento) </dd>
+    <dt>@Html.DisplayNameFor(model => model.Sexo)</dt>
+    <dd>@Html.DisplayFor(model => model.Sexo) </dd>
+</dl>
+<hr />
+<h6 class="text-danger"><b>Tem a certeza que pretende apagar este registo?</b></h6>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" value="Delete" class="btn btn-danger btn-sm" title="Apagar"><i class="fa fa-trash"></i> <span class="small">Apagar</span></button>
+    <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <span class="small">Voltar à Lista</span></a>
+</form>
