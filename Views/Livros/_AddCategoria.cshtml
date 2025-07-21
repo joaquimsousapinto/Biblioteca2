@@ -1,0 +1,36 @@
+﻿@model DTO_Categoria
+@using Biblioteca2.Models.DTO
+<!-- Modal (addCategoriaModal) -->
+<div class="modal fade" id="addCategoriaModal" tabindex="-1" aria-labelledby="addCategoriaModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="_AddCategoria">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="LivroId" value="@Model.LivroId" />
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addCategoriaModalLabel">Adicionar Categoria</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating">
+                        <select asp-for="CategoriaId" class="form-select" asp-items="@Model.Categorias">
+                            <option value="">--- Seleciona uma categoria ---</option>
+                        </select>
+                        <label asp-for="CategoriaId" class="control-label"></label>
+                        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm" title="Guardar"><i class="fa fa-save"></i> <small>Guardar</small></button>
+                    <button type="button" class="btn btn-default btn-sm icon-link" data-bs-dismiss="modal"><i class="btn-close"></i> <small>Fechar</small></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

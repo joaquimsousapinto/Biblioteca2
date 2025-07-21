@@ -1,0 +1,65 @@
+﻿@using Biblioteca2.Models.DTO
+@model Biblioteca2.Models.Livro
+@{
+    ViewData["Title"] = "Autor - Detalhes";
+    int max = (Model.LivroAutors.Count > 0) ? Model.LivroAutors.Max(x => x.OrdemAutoria) + 1 : 1;
+    DTO_Autor autor = new DTO_Autor() { LivroId = Model.Id, AutorId = 0, OrdemAutoria = max, Autores = ViewBag.Autores };
+    DTO_Categoria categoria = new DTO_Categoria() { LivroId = Model.Id, CategoriaId = 0, Categorias = ViewBag.Categorias };
+}
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
+</div>
+<dl>
+    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Titulo)</dt>
+    <dd>@Html.DisplayFor(model => model.Titulo)</dd>
+    <dt>@Html.DisplayNameFor(model => model.AnoPublicacao)</dt>
+    <dd>@Html.DisplayFor(model => model.AnoPublicacao)</dd>
+    <dt>@Html.DisplayNameFor(model => model.AnoEdicao)</dt>
+    <dd>@Html.DisplayFor(model => model.AnoEdicao)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Exemplares)</dt>
+    <dd>@Html.DisplayFor(model => model.Exemplares)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Editora)</dt>
+    <dd>@Html.DisplayFor(model => model.Editora.Nome)</dd>
+    <dt>@Html.DisplayNameFor(model => model.LivroAutors) <button type="button" class="btn btn-xs btn-default" data-bs-toggle="modal" data-bs-target="#addAutorModal"><i class="fa fa-plus"></i></button></dt>
+    <dd>
+        <div class="row row-cols-4 g-1 mt-1">
+            @foreach (var item in Model.LivroAutors.OrderBy(X => X.OrdemAutoria))
+            {
+                <div class="col">
+                    <div class="border rounded-2 p-1">
+                        <i class="fa fa-user-o"></i> @item.Autor.Nome
+                        <a asp-action="DeleteAutor" asp-route-livroid="@Model.Id" asp-route-autorId="@item.AutorId" class="float-end icon-link" title="Remover autoria"><i class="btn-close"></i></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </dd>
+    <dt>@Html.DisplayNameFor(model => model.Categoria) <button type="button" class="btn btn-xs btn-default" data-bs-toggle="modal" data-bs-target="#addCategoriaModal"><i class="fa fa-plus"></i></button></dt>
+    <dd>
+        <div class="row row-cols-4 g-1 mt-1">
+            @foreach (var item in Model.Categoria.OrderBy(x => x.Nome))
+            {
+                <div class="col">
+                    <div class="border rounded-2 p-1">
+                        <i class="fa fa-bookmark-o"></i> @item.Nome
+                        <a asp-action="DeleteCategoria" asp-route-livroid="@Model.Id" asp-route-categoriaId="@item.Id" class="float-end icon-link" title="Remover categoria"><i class="btn-close"></i></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </dd>
+</dl>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm" title="Editar"><i class="fa fa-pencil"></i> <small>Editar</small></a>
+    <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <small>Voltar à Lista</small></a>
+</p>
+<partial name="_AddAutor" model="autor" />
+<partial name="_AddCategoria" model="categoria" />
+<partial name="_ToastStatus" />
+@section Scripts {
+    <script>
+        $('document').ready(function () {
+            $(".toast").toast('show');
+        });
+    </script>
+}

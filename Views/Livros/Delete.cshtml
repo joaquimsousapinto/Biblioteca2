@@ -1,0 +1,23 @@
+﻿@model Biblioteca2.Models.Livro
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
+</div>
+<dl>
+    <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Titulo)</dt>
+    <dd>@Html.DisplayFor(model => model.Titulo)</dd>
+    <dt>@Html.DisplayNameFor(model => model.AnoPublicacao)</dt>
+    <dd>@Html.DisplayFor(model => model.AnoPublicacao)</dd>
+    <dt>@Html.DisplayNameFor(model => model.AnoEdicao)</dt>
+    <dd>@Html.DisplayFor(model => model.AnoEdicao)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Exemplares)</dt>
+    <dd>@Html.DisplayFor(model => model.Exemplares)</dd>
+    <dt>@Html.DisplayNameFor(model => model.Editora)</dt>
+    <dd>@Html.DisplayFor(model => model.Editora.Nome)</dd>
+</dl>
+<hr />
+<h6 class="text-danger"><b>Tem a certeza que pretende apagar este registo?</b></h6>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" value="Delete" class="btn btn-danger btn-sm" title="Apagar"><i class="fa fa-trash"></i> <span class="small">Apagar</span></button>
+    <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <span class="small">Voltar à Lista</span></a>
+</form>
