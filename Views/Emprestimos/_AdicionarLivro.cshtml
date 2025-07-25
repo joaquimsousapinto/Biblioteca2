@@ -1,0 +1,44 @@
+﻿@model DTO_Livro
+@using Biblioteca2.Models.DTO
+<!-- Modal (addLivroModal) -->
+<div class="modal fade" id="addLivroModal" tabindex="-1" aria-labelledby="addAutorModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="_AdicionarLivro">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="EmprestimoId" />
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addAutorModalLabel">Adicionar Autor</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-floating mb-1">
+                        <select class="form-select" asp-for="LivroId">
+                            <option value="">--- Seleciona um livro ---</option>
+                            @foreach (var item in Model.Livros)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <label asp-for="LivroId" class="control-label"></label>
+                        <span asp-validation-for="LivroId"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input asp-for="Quantidade" class="form-control" data-val="true" data-val-required="Campo de preenchimento obrigatório." />
+                        <label asp-for="Quantidade" class="control-label"></label>
+                        <span asp-validation-for="Quantidade"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm" title="Guardar"><i class="fa fa-save"></i> <small>Guardar</small></button>
+                    <button type="button" class="btn btn-default btn-sm icon-link" data-bs-dismiss="modal"><i class="btn-close"></i> <small>Fechar</small></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

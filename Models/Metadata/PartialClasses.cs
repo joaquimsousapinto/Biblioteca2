@@ -6,6 +6,10 @@ namespace Biblioteca2.Models
     [ModelMetadataType(typeof(MetadataAutor))]
     public partial class Autor
     { }
+    [ModelMetadataType(typeof(MetadataEmprestimo))]
+
+    public partial class Emprestimo
+    { }
 
     [ModelMetadataType(typeof(MetadataLivro))]
     public partial class Livro

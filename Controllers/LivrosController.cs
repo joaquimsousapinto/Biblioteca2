@@ -174,7 +174,7 @@ namespace Biblioteca2.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost, ActionName("_AddAutor")]
+        [HttpPost, ActionName("_AdicionarAutor")]
         public async Task<IActionResult> AddAutor(int LivroId, [Bind("LivroId, AutorId, OrdemAutoria")] DTO_Autor autor)
         {
             var livro = await _context.Livros.FindAsync(LivroId);
@@ -198,7 +198,7 @@ namespace Biblioteca2.Controllers
             return RedirectToAction(nameof(Details), new { Id= LivroId});
         }
 
-        [ActionName("DeleteAutor")]
+        [ActionName("_ApagarAutor")]
         public async Task<IActionResult> DeleteAutor(int livroid, int autorid)
         {
             var livro = await _context.Livros.Include(x=>x.LivroAutors).FirstAsync(x=>x.Id == livroid);
@@ -218,7 +218,7 @@ namespace Biblioteca2.Controllers
         }
 
 
-        [HttpPost, ActionName("_AddCategoria")]
+        [HttpPost, ActionName("_AdicionarCategoria")]
         public async Task<IActionResult> AddCategoria(int LivroId, [Bind("LivroId, CategoriaId")] DTO_Categoria categoria)
         {
             var livro = await _context.Livros.FindAsync(LivroId);
@@ -237,7 +237,7 @@ namespace Biblioteca2.Controllers
             return RedirectToAction(nameof(Details), new { Id= LivroId});
         }
 
-        [ActionName("DeleteCategoria")]
+        [ActionName("_ApagarCategoria")]
         public async Task<IActionResult> DeleteCategoria(int livroid, int categoriaid)
         {
             var livro = await _context.Livros.Include(x=>x.Categoria).FirstAsync(x=>x.Id == livroid);

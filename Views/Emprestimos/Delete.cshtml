@@ -1,0 +1,26 @@
+﻿@model Biblioteca2.Models.Emprestimo
+@{
+    ViewData["Title"] = "Empréstimo - Apagar";
+}
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-book text-danger"></i> @ViewBag.Title</h2>
+</div>
+<dl>
+    <dt>@Html.DisplayNameFor(model => model.DataEmprestimo)</dt>
+    <dd>@Html.DisplayFor(model => model.DataEmprestimo)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DataDevolucaoPrevista)</dt>
+    <dd>@Html.DisplayFor(model => model.DataDevolucaoPrevista)</dd>
+    <dt>@Html.DisplayNameFor(model => model.DataDevolucaoReal)</dt>
+    <dd>@Html.DisplayFor(model => model.DataDevolucaoReal)</dd>
+    <dt>@Html.DisplayNameFor(model => model.UtilizadorId)</dt>
+    <dd>@Html.DisplayFor(model => model.Utilizador.Nome)</dd>
+    <dt>@Html.DisplayNameFor(model => model.EstadoId)</dt>
+    <dd>@Html.DisplayFor(model => model.EmprestimoLivros)</dd>
+</dl>
+<hr />
+<h6 class="text-danger"><b>Tem a certeza que pretende apagar este registo?</b></h6>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" value="Delete" class="btn btn-danger btn-sm" title="Apagar"><i class="fa fa-trash"></i> <span class="small">Apagar</span></button>
+    <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <span class="small">Voltar à Lista</span></a>
+</form>

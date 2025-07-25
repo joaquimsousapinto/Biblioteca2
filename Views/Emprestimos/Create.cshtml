@@ -1,0 +1,51 @@
+﻿@model Biblioteca2.Models.Emprestimo
+@{
+    ViewData["Title"] = "Empréstimo - Criar";
+}
+<div class="border-bottom mt-4 mb-2">
+    <h2><i class="fa fa-book text-danger"></i> @ViewData["Title"]</h2>
+</div>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row row-cols-2 g-1">
+        <div class="col">
+            <div class="form-floating mb-1">
+                <select asp-for="UtilizadorId" class="form-select" asp-items="ViewBag.UtilizadorId"></select>
+                <label asp-for="UtilizadorId" class="control-label"></label>
+                <span asp-validation-for="UtilizadorId" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-1">
+                <select asp-for="EstadoId" class="form-select" asp-items="ViewBag.EstadoId"></select>
+                <label asp-for="EstadoId" class="control-label"></label>
+                <span asp-validation-for="EstadoId" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="form-floating mb-1">
+                <input asp-for="DataEmprestimo" class="form-control" />
+                <label asp-for="DataEmprestimo" class="control-label"></label>
+                <span asp-validation-for="DataEmprestimo" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-1">
+                <input asp-for="DataDevolucaoPrevista" class="form-control" />
+                <label asp-for="DataDevolucaoPrevista" class="control-label"></label>
+                <span asp-validation-for="DataDevolucaoPrevista" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-1">
+                <input asp-for="DataDevolucaoReal" class="form-control" />
+                <label asp-for="DataDevolucaoReal" class="control-label"></label>
+                <span asp-validation-for="DataDevolucaoReal" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+    <hr />
+    <button type="submit" value="Save" class="btn btn-primary btn-sm" title="Guardar"><i class="fa fa-save"></i> <span class="small">Guardar</span></button>
+    <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <span class="small">Voltar à Lista</span></a>
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

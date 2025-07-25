@@ -7,7 +7,7 @@
     DTO_Categoria categoria = new DTO_Categoria() { LivroId = Model.Id, CategoriaId = 0, Categorias = ViewBag.Categorias };
 }
 <div class="border-bottom mt-4 mb-2">
-    <h2><i class="fa fa-user-o text-danger"></i> @ViewBag.Title</h2>
+    <h2><i class="fa fa-book text-danger"></i> @ViewBag.Title</h2>
 </div>
 <dl>
     <dt class="col-sm-2">@Html.DisplayNameFor(model => model.Titulo)</dt>
@@ -28,7 +28,7 @@
                 <div class="col">
                     <div class="border rounded-2 p-1">
                         <i class="fa fa-user-o"></i> @item.Autor.Nome
-                        <a asp-action="DeleteAutor" asp-route-livroid="@Model.Id" asp-route-autorId="@item.AutorId" class="float-end icon-link" title="Remover autoria"><i class="btn-close"></i></a>
+                        <a asp-action="_ApagarAutor" asp-route-livroid="@Model.Id" asp-route-autorId="@item.AutorId" class="float-end icon-link" title="Remover autoria"><i class="btn-close"></i></a>
                     </div>
                 </div>
             }
@@ -42,7 +42,7 @@
                 <div class="col">
                     <div class="border rounded-2 p-1">
                         <i class="fa fa-bookmark-o"></i> @item.Nome
-                        <a asp-action="DeleteCategoria" asp-route-livroid="@Model.Id" asp-route-categoriaId="@item.Id" class="float-end icon-link" title="Remover categoria"><i class="btn-close"></i></a>
+                        <a asp-action="_ApagarCategoria" asp-route-livroid="@Model.Id" asp-route-categoriaId="@item.Id" class="float-end icon-link" title="Remover categoria"><i class="btn-close"></i></a>
                     </div>
                 </div>
             }
@@ -53,8 +53,8 @@
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm" title="Editar"><i class="fa fa-pencil"></i> <small>Editar</small></a>
     <a asp-action="Index" class="btn btn-default btn-sm" title="Voltar à Lista"><i class="fa fa-list"></i> <small>Voltar à Lista</small></a>
 </p>
-<partial name="_AddAutor" model="autor" />
-<partial name="_AddCategoria" model="categoria" />
+<partial name="_AdicionarAutor" model="autor" />
+<partial name="_AdicionarCategoria" model="categoria" />
 <partial name="_ToastStatus" />
 @section Scripts {
     <script>
